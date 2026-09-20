@@ -571,6 +571,122 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.12;font-weight:700;let
 @media (prefers-reduced-motion:reduce){
   .hero-media,.hero-glow.g1,.hero-glow.g2,.hero-sweep{animation:none!important;}
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   TrustFabric — Book a Briefing styles
+   Paste this block at the end of your existing inline stylesheet,
+   just before the style element closes.
+   Uses your existing tokens (--primary #6A3DFF, --accent #B388FF,
+   --surface #170C2C, --text #F2F3F6) — nothing new to define.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Scheduler panel ------------------------------------------------- */
+.booking-panel {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(179, 136, 255, 0.28);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(106, 61, 255, 0.14), rgba(106, 61, 255, 0.04));
+}
+.booking-panel h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+.booking-panel p {
+  margin: 0 0 1.1rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+/* "or" divider ---------------------------------------------------- */
+.booking-or {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.booking-or::before,
+.booking-or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+/* Full-width buttons ---------------------------------------------- */
+.btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* Pending / disabled submit state --------------------------------- */
+.btn.is-busy {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Honeypot: off-screen, never focusable, invisible to real users --- */
+.hp {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Inline validation ----------------------------------------------- */
+.field.has-error input,
+.field.has-error textarea,
+.field.has-error select {
+  border-color: #ff6b8a;
+}
+.field-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #ff8da3;
+}
+
+/* Result panels ---------------------------------------------------- */
+.success-panel,
+.error-panel {
+  display: none;
+}
+.success-panel.is-visible,
+.error-panel.is-visible {
+  display: block;
+}
+.contact-form.is-hidden,
+.booking-panel.is-hidden,
+.booking-or.is-hidden {
+  display: none;
+}
+
+.error-panel .s-icon-warn svg {
+  stroke: #ff8da3;
+  fill: none;
+}
+.error-panel .error-mail {
+  margin: 0.6rem 0 1.2rem;
+  font-size: 1.02rem;
+}
+.error-panel .error-mail a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.success-panel #successBookLink {
+  margin-top: 1rem;
+}
 </style>
 </head>
 <body>
@@ -856,64 +972,125 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.12;font-weight:700;let
   </section>
 
   <!-- ============ CONTACT ============ -->
-  <section class="section contact-section" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-copy" data-reveal>
-          <span class="eyebrow">Get Started</span>
-          <h2>Let's assess your trust layer.</h2>
-          <p>Tell us what you are trying to protect, modernise or validate. We'll arrange an executive briefing to understand the environment and define the right next step.</p>
-          <div class="contact-meta">
-            <div><strong>Coverage</strong>Africa &amp; Middle East</div>
-            <div><strong>For</strong>Banking, insurance, healthcare, telecommunications, mining, government &amp; large enterprises</div>
-          </div>
-        </div>
-        <div class="form-card" data-reveal>
-          <form class="contact-form" id="briefingForm">
-            <div class="form-row">
-              <div class="field">
-                <label for="fname">Full name</label>
-                <input type="text" id="fname" name="fname" required autocomplete="name" />
-              </div>
-              <div class="field">
-                <label for="femail">Work email</label>
-                <input type="email" id="femail" name="femail" required autocomplete="email" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="fcompany">Company</label>
-                <input type="text" id="fcompany" name="fcompany" required autocomplete="organization" />
-              </div>
-              <div class="field">
-                <label for="fcountry">Country</label>
-                <select id="fcountry" name="fcountry">
-                  <option>South Africa</option>
-                  <option>UAE</option>
-                  <option>Saudi Arabia</option>
-                  <option>Nigeria</option>
-                  <option>Kenya</option>
-                  <option>Egypt</option>
-                  <option>Other Africa &amp; Middle East</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="fmessage">What are you looking to solve?</label>
-              <textarea id="fmessage" name="fmessage" placeholder="e.g. We need visibility into API and AI-agent risk before our next audit."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Book an Executive Briefing</button>
-            <p class="form-note">Your request opens in your email application so you can review and send it securely. Prefer email? <a href="mailto:hello@trustfabric.co.za" style="color:var(--accent);">hello@trustfabric.co.za</a></p>
-          </form>
-          <div class="success-panel" id="successPanel">
-            <div class="s-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3>Email draft ready</h3>
-            <p>Send the prepared email from your mail application to complete your briefing request.</p>
-          </div>
+  <!-- ═══════════════════════════════════════════════════════════════════
+     TrustFabric — Book a Briefing
+     Replacement for the whole <section id="contact"> ... </section>
+
+     What changed vs. the current site:
+       • Adds a real scheduler path ("Pick a time") — the CTA now does
+         what it promises instead of only scrolling to a form.
+       • The form posts to /api/briefing and only reports success when
+         the server actually accepted it.
+       • Adds an explicit failure state with a working mailto fallback,
+         so a submission is never silently lost.
+       • Adds a honeypot + timing field for bot filtering.
+     No other CTA on the page needs to change — they all point at
+     #contact, which now offers both paths.
+     ══════════════════════════════════════════════════════════════════ -->
+
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-copy" data-reveal>
+        <span class="eyebrow">Get Started</span>
+        <h2>Let's assess your trust layer.</h2>
+        <p>Tell us what you are trying to protect, modernise or validate. We'll arrange an executive briefing to understand the environment and define the right next step.</p>
+
+        <div class="contact-meta">
+          <div><strong>Coverage</strong>Africa &amp; Middle East</div>
+          <div><strong>For</strong>Banking, insurance, healthcare, telecommunications, mining, government &amp; large enterprises</div>
         </div>
       </div>
+
+      <div class="form-card" data-reveal>
+
+        <!-- ── Primary path: book a time directly ────────────────── -->
+        <div class="booking-panel" id="bookingPanel">
+          <h3>Book a 30-minute executive briefing</h3>
+          <p>Choose a time that suits you. You'll get a calendar invite immediately.</p>
+          <a class="btn btn-primary btn-block" id="bookingLink" href="#" target="_blank" rel="noopener">
+            Pick a time
+          </a>
+        </div>
+
+        <div class="booking-or"><span>or send us the detail first</span></div>
+
+        <!-- ── Secondary path: qualification form ────────────────── -->
+        <form class="contact-form" id="briefingForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="fname">Full name</label>
+              <input type="text" id="fname" name="fname" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="femail">Work email</label>
+              <input type="email" id="femail" name="femail" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="fcompany">Company</label>
+              <input type="text" id="fcompany" name="fcompany" required autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="fcountry">Country</label>
+              <select id="fcountry" name="fcountry">
+                <option>South Africa</option>
+                <option>UAE</option>
+                <option>Saudi Arabia</option>
+                <option>Nigeria</option>
+                <option>Kenya</option>
+                <option>Egypt</option>
+                <option>Other Africa &amp; Middle East</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="fmessage">What are you looking to solve?</label>
+            <textarea id="fmessage" name="fmessage" placeholder="e.g. We need visibility into API and AI-agent risk before our next audit."></textarea>
+          </div>
+
+          <!-- Bot trap: hidden from humans, irresistible to crawlers. -->
+          <div class="hp" aria-hidden="true">
+            <label for="fwebsite">Website</label>
+            <input type="text" id="fwebsite" name="fwebsite" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="briefingSubmit">
+            <span data-label>Request a Briefing</span>
+          </button>
+          <p class="form-note">
+            We reply within one business day. Prefer email?
+            <a href="mailto:hello@trustfabric.co.za" style="color:var(--accent);">hello@trustfabric.co.za</a>
+          </p>
+        </form>
+
+        <!-- ── Success ───────────────────────────────────────────── -->
+        <div class="success-panel" id="successPanel">
+          <div class="s-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Request received</h3>
+          <p id="successBody">Thank you — we have your details and will be in touch within one business day.</p>
+          <a class="btn btn-ghost btn-sm" id="successBookLink" href="#" target="_blank" rel="noopener">Book a time now</a>
+        </div>
+
+        <!-- ── Failure: never pretend it went through ────────────── -->
+        <div class="error-panel" id="errorPanel">
+          <div class="s-icon s-icon-warn">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 8v5m0 3.5v.01M10.3 3.9 2.4 17.5A1.9 1.9 0 0 0 4 20.4h16a1.9 1.9 0 0 0 1.6-2.9L13.7 3.9a1.9 1.9 0 0 0-3.4 0Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>We couldn't submit that</h3>
+          <p>Nothing was sent. Email us directly and we'll pick it up straight away:</p>
+          <p class="error-mail"><a href="mailto:hello@trustfabric.co.za" id="errorMailLink">hello@trustfabric.co.za</a></p>
+          <button type="button" class="btn btn-ghost btn-sm" id="retryBtn">Try again</button>
+        </div>
+
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
@@ -1298,40 +1475,208 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.12;font-weight:700;let
       link.addEventListener('click', closeMobile);
     });
 
-    // Contact form: honest mail-client fallback until a production form endpoint is configured.
-    var form = document.getElementById('briefingForm');
-    var success = document.getElementById('successPanel');
-    if(form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        if(!form.checkValidity()){
-          form.reportValidity();
-          return;
-        }
+/* ═══════════════════════════════════════════════════════════════════
+   TrustFabric — Book a Briefing handler
 
-        var name = document.getElementById('fname').value.trim();
-        var email = document.getElementById('femail').value.trim();
-        var company = document.getElementById('fcompany').value.trim();
-        var country = document.getElementById('fcountry').value;
-        var message = document.getElementById('fmessage').value.trim();
-        var subject = 'Executive Briefing Request - ' + company;
-        var body = [
-          'Name: ' + name,
-          'Work email: ' + email,
-          'Company: ' + company,
-          'Country: ' + country,
-          '',
-          'What we are looking to solve:',
-          message || 'Not specified',
-          '',
-          'Please contact me to arrange an executive briefing.'
-        ].join('\n');
+   Replaces the block in your inline script that currently starts:
 
-        window.location.href = 'mailto:hello@trustfabric.co.za?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        form.classList.add('is-hidden');
-        success.classList.add('is-visible');
-      });
+       // Contact form: honest mail-client fallback until a production
+       // form endpoint is configured.
+       var form = document.getElementById('briefingForm');
+
+   ...through the closing  }  of  if(form){ ... }
+
+   Behaviour:
+     • "Pick a time" opens your Microsoft Bookings page.
+     • The form POSTs to /api/briefing and shows success ONLY on a 2xx.
+     • Any failure shows the error panel with a pre-filled mailto —
+       it never claims success it didn't get.
+     • Before the API exists, set BRIEFING_ENDPOINT to '' and the form
+       degrades to an honest mail-client handoff.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── The only two lines you need to edit ─────────────────────────── */
+var BOOKINGS_URL      = 'https://bookings.cloud.microsoft/bookwithme/user/f779639a9def49cb8c69772657feee5c@trustfabric.co.za/meetingtype/I8QVepEOokWq698ykEhYHA2?anonymous&ismsaljsauthenabled&ep=mlink';
+var BRIEFING_ENDPOINT = '/api/briefing';   // '' = mail-client fallback mode
+/* ────────────────────────────────────────────────────────────────── */
+
+var CONTACT_EMAIL = 'hello@trustfabric.co.za';
+
+(function () {
+  var form     = document.getElementById('briefingForm');
+  var success  = document.getElementById('successPanel');
+  var errorEl  = document.getElementById('errorPanel');
+  var panel    = document.getElementById('bookingPanel');
+  var divider  = document.querySelector('.booking-or');
+  var submit   = document.getElementById('briefingSubmit');
+  var bookLink = document.getElementById('bookingLink');
+  var bookAgain = document.getElementById('successBookLink');
+  var retry    = document.getElementById('retryBtn');
+
+  /* Wire the scheduler. If the URL hasn't been set yet, hide the panel
+     rather than shipping a dead button. */
+  var bookingReady = BOOKINGS_URL && BOOKINGS_URL.indexOf('REPLACE-ME') === -1;
+  if (bookingReady) {
+    if (bookLink)  bookLink.href  = BOOKINGS_URL;
+    if (bookAgain) bookAgain.href = BOOKINGS_URL;
+  } else {
+    if (panel)     panel.style.display = 'none';
+    if (divider)   divider.style.display = 'none';
+    if (bookAgain) bookAgain.style.display = 'none';
+  }
+
+  if (!form) return;
+
+  var loadedAt = Date.now();
+
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? String(el.value || '').trim() : '';
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('.field.has-error').forEach(function (f) {
+      f.classList.remove('has-error');
+      var m = f.querySelector('.field-error');
+      if (m) m.remove();
+    });
+  }
+
+  function flag(id, message) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var field = el.closest('.field');
+    if (!field || field.classList.contains('has-error')) return;
+    field.classList.add('has-error');
+    var span = document.createElement('span');
+    span.className = 'field-error';
+    span.textContent = message;
+    field.appendChild(span);
+  }
+
+  function validate(data) {
+    clearErrors();
+    var ok = true;
+    if (!data.name)    { flag('fname',    'Please enter your name.');    ok = false; }
+    if (!data.company) { flag('fcompany', 'Please enter your company.'); ok = false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) {
+      flag('femail', 'Please enter a valid work email.'); ok = false;
     }
+    if (!ok) {
+      var first = form.querySelector('.field.has-error input, .field.has-error select');
+      if (first) first.focus();
+    }
+    return ok;
+  }
+
+  function mailtoFor(data) {
+    var body = [
+      'Name: '       + data.name,
+      'Work email: ' + data.email,
+      'Company: '    + data.company,
+      'Country: '    + data.country,
+      '',
+      'What we are looking to solve:',
+      data.message || 'Not specified',
+      '',
+      'Please contact me to arrange an executive briefing.'
+    ].join('\n');
+    return 'mailto:' + CONTACT_EMAIL +
+           '?subject=' + encodeURIComponent('Executive Briefing Request - ' + data.company) +
+           '&body='    + encodeURIComponent(body);
+  }
+
+  function show(which, data) {
+    form.classList.add('is-hidden');
+    if (panel)   panel.classList.add('is-hidden');
+    if (divider) divider.classList.add('is-hidden');
+    if (which === 'success') {
+      success.classList.add('is-visible');
+      if (bookAgain) bookAgain.style.display = bookingReady ? '' : 'none';
+    } else {
+      var link = document.getElementById('errorMailLink');
+      if (link && data) link.href = mailtoFor(data);
+      errorEl.classList.add('is-visible');
+    }
+    (which === 'success' ? success : errorEl)
+      .scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reset() {
+    errorEl.classList.remove('is-visible');
+    success.classList.remove('is-visible');
+    form.classList.remove('is-hidden');
+    if (panel && bookingReady)   panel.classList.remove('is-hidden');
+    if (divider && bookingReady) divider.classList.remove('is-hidden');
+  }
+
+  function busy(on) {
+    if (!submit) return;
+    submit.classList.toggle('is-busy', on);
+    submit.disabled = on;
+    var label = submit.querySelector('[data-label]');
+    if (label) label.textContent = on ? 'Sending…' : 'Request a Briefing';
+  }
+
+  if (retry) retry.addEventListener('click', reset);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var data = {
+      name:    val('fname'),
+      email:   val('femail'),
+      company: val('fcompany'),
+      country: val('fcountry'),
+      message: val('fmessage'),
+      website: val('fwebsite'),            // honeypot — must stay empty
+      elapsed: Date.now() - loadedAt,      // sub-second fills are bots
+      page:    location.pathname + location.search
+    };
+
+    if (!validate(data)) return;
+
+    /* No endpoint configured yet: hand off to the mail client, and be
+       straight about the fact that the visitor still has to press Send. */
+    if (!BRIEFING_ENDPOINT) {
+      window.location.href = mailtoFor(data);
+      show('error', data);
+      var h = errorEl.querySelector('h3');
+      var p = errorEl.querySelector('p');
+      if (h) h.textContent = 'One more step';
+      if (p) p.textContent = 'We’ve opened a pre-filled email in your mail app — please press Send to complete your request. If nothing opened, email us directly:';
+      return;
+    }
+
+    busy(true);
+
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 15000);
+
+    fetch(BRIEFING_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      signal: controller.signal
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json().catch(function () { return {}; });
+      })
+      .then(function () {
+        clearTimeout(timeout);
+        busy(false);
+        show('success');
+        if (window.gtag) window.gtag('event', 'briefing_request');
+      })
+      .catch(function (err) {
+        clearTimeout(timeout);
+        busy(false);
+        if (window.console) console.warn('Briefing submit failed:', err);
+        show('error', data);
+      });
+  });
+})();
 
     // Initial reveal + nav state
     revealAll();
